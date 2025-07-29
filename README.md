@@ -2,11 +2,11 @@
 
 ## Presentation
 
-Se trata de lo mas externo de los circulos que manejan en Clean Architecture. Se trata de lo que tiene comunicacion mas cercana a los usuarios. Esto es algo que puede cambiarse unicamente aqui, y la comunicacion con nuestra API no debería de verse afectada. Esto lo vuelve seguro para modificar y poder ocupar las bases de datos, por ejemplo, que necesitemos.
+Se trata de lo mas externo de los circulos que manejan en Clean Architecture. Aquello que tiene la comunicación mas cercana a los usuarios. Una de las ventajas es que puede cambiarse únicamente aquí el código, y la comunicacion con nuestra API no debería de verse afectada. Gracias a esto se vuelve seguro para modificar y poder ocupar las bases de datos, que necesitemos.
 
 ## Domain
 
-Carpeta realmente importante. Aquí estarán las reglas que gobiernan nuestra aplicación y nuestra forma de trabajar. También se recomienda que este código no tenga dependencias externas, porque rompería la idea de que no se comuniquen con otros lados.
+Carpeta realmente importante. Aquí estarán las reglas que gobiernan nuestra aplicación y nuestra forma de trabajar. También se recomienda que este código no tenga dependencias externas, porque rompería la idea de que no se comuniquen hacia los círculos más alejados del centro.
 
 ## Infrastructure
 

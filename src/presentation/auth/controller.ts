@@ -1,5 +1,7 @@
-import { Request, Response } from 'express';
+import { Request, Response as Response } from 'express';
 import { AuthRepository, CustomError, RegisterUserDto } from '../../domain';
+import { JWTAdapter } from '../../config';
+import { UserModel } from '../../data/mongodb';
 
 export class AuthController {
 
@@ -26,13 +28,33 @@ export class AuthController {
         }
 
         this.authRepository.register( registerUserDto! )
-            .then( user => res.json(user))
+            .then( async (user) => {
+                res.json({
+                    user,
+                    token: await JWTAdapter.generateToken({ id: user.id })
+                })
+            })
             .catch( error => this.handleError(error, res) );
 
     }
 
     loginUser = (req: Request, res: Response) => {
         res.json('LoginUser Controller')
+    }
+
+
+
+    getUsers = (req: Request, res: Response) => {
+
+        UserModel.find()
+            .then( users => {
+                res.json({
+                    users,
+                    token: req.header("Authorization")
+                })
+            } )
+            .catch( () => res.status(500).json({ error: "Internal Server Error" }));
+        
     }
     
     
